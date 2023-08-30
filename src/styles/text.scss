@@ -1,0 +1,16 @@
+$smallFontSize: 12px;
+$regularFontSize: 13px;
+$mediumFontSize: 14px;
+$semiLargeFontSize: 16px;
+$largeFontSize: 24px;
+$superLargeFontSize: 30px;
+
+$regularWeight: 400;
+$mediumWeight: 500;
+$semiBoldWeight: 600;
+
+@mixin regular-text {
+  font-weight: $regularWeight;
+  font-size: $regularFontSize;
+}
+

@@ -11,7 +11,7 @@ import {
   faSignOutAlt,
   faUser,
 } from '@fortawesome/free-solid-svg-icons'
-import css from './Navbar.module.scss'
+import css from './navbar.module.scss'
 import { NavItem } from './nav-item'
 
 const sampleNavItems = [
@@ -22,12 +22,8 @@ const sampleNavItems = [
 ]
 
 export const Navbar = () => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const [activeIndex, _setActiveIndex] = useState<number | null>(null)
   const [expanded, setExpanded] = useState(true)
-
-  const handleNavItemClick = (index: number) => {
-    setActiveIndex(index === activeIndex ? null : index)
-  }
 
   const handleToggleExpanded = () => {
     setExpanded(!expanded);
@@ -39,14 +35,14 @@ export const Navbar = () => {
         [css.expanded]: expanded,
       })}
     >
-      <header
-        className={css.header}
-        onClick={handleToggleExpanded}
-      >
+      <header className={css.header}>
         {expanded && <p>Company Name</p>}
-        <div className={css.iconContainer}>
+        <button
+          className={css.iconContainer}
+          onClick={handleToggleExpanded}
+        >
           <FontAwesomeIcon icon={faBars} className="icon" />
-        </div>
+        </button>
       </header>
 
       <div className={css.navlist}>
@@ -57,7 +53,6 @@ export const Navbar = () => {
             label={label}
             active={idx === activeIndex}
             expanded={expanded}
-            onClick={() => handleNavItemClick(idx)}
           />
         )}
       </div>

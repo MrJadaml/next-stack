@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import cn from 'classnames'
-import css from './NavItem.module.scss'
+import css from './navItem.module.scss'
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 
 interface NavItemProps {
@@ -9,7 +9,6 @@ interface NavItemProps {
   icon: IconDefinition
   key: string
   label: string
-  onClick: () => void
 }
 
 export const NavItem: React.FC<NavItemProps> = ({
@@ -17,32 +16,28 @@ export const NavItem: React.FC<NavItemProps> = ({
   expanded,
   icon,
   label,
-  onClick,
 }) => {
   const ariaLabel = expanded ? `${label} - Expanded` : label
 
   return (
-    <button
+    <div
       className={cn(css.navItem, {
         [css.active]: active,
         [css.expanded]: expanded,
       })}
-      onClick={onClick}
       aria-label={ariaLabel}
     >
-      <div
-        className={css.iconContainer}
-        onClick={onClick}
-      >
+      <div className={css.iconContainer}>
         <FontAwesomeIcon
           icon={icon}
           className="icon"
           aria-hidden="true"
         />
       </div>
+
       {expanded && <div className={css.label}>{label}</div>}
       {!expanded && <span className={css.tooltip}>{label}</span>}
-    </button>
+    </div>
   )
 }
 
