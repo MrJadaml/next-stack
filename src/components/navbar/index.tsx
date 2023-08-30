@@ -23,7 +23,7 @@ const sampleNavItems = [
 
 export const Navbar = () => {
   const [activeIndex, _setActiveIndex] = useState<number | null>(null)
-  const [expanded, setExpanded] = useState(true)
+  const [expanded, setExpanded] = useState<boolean>(true)
 
   const handleToggleExpanded = () => {
     setExpanded(!expanded);
@@ -40,12 +40,21 @@ export const Navbar = () => {
         <button
           className={css.iconContainer}
           onClick={handleToggleExpanded}
+          aria-label="toggle navigation"
+          aria-expanded={expanded}
         >
-          <FontAwesomeIcon icon={faBars} className="icon" />
+          <FontAwesomeIcon
+            className="icon"
+            icon={faBars}
+            title="menu icon"
+          />
         </button>
       </header>
 
-      <div className={css.navlist}>
+      <ul
+        className={css.navlist}
+        role="list"
+      >
         {sampleNavItems.map(({ icon, label}, idx) => 
           <NavItem
             key={label}
@@ -55,11 +64,15 @@ export const Navbar = () => {
             expanded={expanded}
           />
         )}
-      </div>
+      </ul>
 
       <footer className={css.footer}>
         <div className={css.iconContainer}>
-          <FontAwesomeIcon icon={faSignOutAlt} className="icon" />
+          <FontAwesomeIcon
+            className="icon"
+            icon={faSignOutAlt}
+            title="logout icon"
+          />
         </div>
         {expanded && <p>Log Out</p>}
       </footer>

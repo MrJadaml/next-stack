@@ -20,12 +20,13 @@ export const NavItem: React.FC<NavItemProps> = ({
   const ariaLabel = expanded ? `${label} - Expanded` : label
 
   return (
-    <div
+    <li
       className={cn(css.navItem, {
         [css.active]: active,
         [css.expanded]: expanded,
       })}
       aria-label={ariaLabel}
+      role="listitem"
     >
       <div className={css.iconContainer}>
         <FontAwesomeIcon
@@ -35,9 +36,15 @@ export const NavItem: React.FC<NavItemProps> = ({
         />
       </div>
 
-      {expanded && <div className={css.label}>{label}</div>}
-      {!expanded && <span className={css.tooltip}>{label}</span>}
-    </div>
+      <div
+        className={cn('non', {
+          [css.label]: expanded,
+          [css.tooltip]: !expanded,
+        })}
+       >
+        {label}
+      </div>
+    </li>
   )
 }
 
