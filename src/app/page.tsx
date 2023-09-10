@@ -1,43 +1,32 @@
-import Image from 'next/image'
 import '../styles/globals.scss'
 import styles from './page.module.css'
+import prisma from '../../lib/prisma'
 
-export default function Home() {
+async function getPosts() {
+  const posts = await prisma.post.findMany({
+    where: { published: true },
+    include: {
+      author: {
+        select: { name: true },
+      },
+    },
+  })
+
+  return posts
+}
+
+export default async function Home() {
+  const posts = await getPosts()
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+        {posts.map(post => (
+          <div key={post.id}>
+            <h3>{post.title}</h3>
+            <p>Author: {post.author?.name}</p>
+          </div>
+        ))}
       </div>
 
       <div className={styles.grid}>
@@ -94,3 +83,4 @@ export default function Home() {
     </main>
   )
 }
+ 
