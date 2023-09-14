@@ -11,6 +11,11 @@ import {
   faSignOutAlt,
   faUser,
 } from '@fortawesome/free-solid-svg-icons'
+import {
+  signIn,
+  signOut,
+  useSession,
+} from 'next-auth/react'
 import css from './navbar.module.scss'
 import { NavItem } from './nav-item'
 
@@ -24,10 +29,12 @@ const sampleNavItems = [
 export const Navbar = () => {
   const [activeIndex, _setActiveIndex] = useState<number | null>(null)
   const [expanded, setExpanded] = useState<boolean>(true)
+  const { data: session } = useSession()
 
   const handleToggleExpanded = () => {
     setExpanded(!expanded);
   }
+
 
   return (
     <nav
@@ -52,7 +59,7 @@ export const Navbar = () => {
       </header>
 
       <ul
-        className={css.navlist}
+        className={css.navList}
         role="list"
       >
         {sampleNavItems.map(({ icon, label}, idx) => 
@@ -67,6 +74,26 @@ export const Navbar = () => {
       </ul>
 
       <footer className={css.footer}>
+        <div className={css.user}>
+          {expanded && (
+            <>
+              {session?.user?.name}
+
+              {session ? (
+                <button onClick={() => signOut()}>
+                  Sign Out
+                </button>
+              ) : (
+                <>
+                  <button onClick={() => signIn()}>
+                    Sign In
+                  </button>
+                </>
+              )}
+            </>
+          )}
+        </div>
+
         <div className={css.iconContainer}>
           <FontAwesomeIcon
             className="icon"
@@ -74,8 +101,8 @@ export const Navbar = () => {
             title="logout icon"
           />
         </div>
-        {expanded && <p>Log Out</p>}
       </footer>
     </nav>
   )
 }
+

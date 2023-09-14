@@ -24,14 +24,10 @@
   border-bottom: 1px solid grey;
 }
 
-.nav-list {
-  flex: 0 0 auto;
-  margin-top: 20px;
-}
-
 .footer {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   padding: 10px;
   cursor: pointer;
@@ -45,7 +41,13 @@
   margin-top: auto;
   padding-top: 10px;
   border-top: 1px solid grey;
+
+  .user {
+    display: flex;
+    flex-direction: column;
+  }
 }
+
 
 .expanded {
 }
