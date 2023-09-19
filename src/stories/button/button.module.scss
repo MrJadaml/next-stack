@@ -1,0 +1,94 @@
+@import '../../../src/styles/colors.scss';
+
+.button {
+  border: none;
+  border-radius: 0.25rem;
+  color: inherit;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0.5rem;
+  text-align: center;
+  width: max-content;
+}
+
+/* View https://css-tricks.com/slightly-careful-sub-elements-clickable-things */
+.button > * {
+    pointer-events: none;
+}
+
+.primary {
+  background-color: $primary;
+  color: white;
+
+  &:hover {
+    background-color: $primaryL2;
+  }
+
+  &:active {
+    background-color: $primaryD2;
+  }
+
+  &:focus-visible {
+    outline: 0.1rem dashed $primaryUp;
+    outline-offset: 0.1rem;
+  }
+}
+
+.secondary {
+  background-color: transparent;
+  border: 0.1rem solid $primary;
+  color: $primary;
+
+  &:hover {
+    background-color: $primaryL2;
+    color: white;
+  }
+
+  &:active {
+    border: 0.1rem solid $primaryD2;
+    background-color: $primaryD2;
+    color: $white;
+  }
+
+  &:focus-visible {
+    outline: 0.1rem dashed $primaryUp;
+    outline-offset: 0.1rem;
+  }
+}
+
+.tertiary {
+  background-color: transparent;
+  color: $primary;
+  text-decoration: $primary underline;
+
+  &:hover {
+    background-color: $primaryL2;
+    text-decoration: none;
+    color: white;
+  }
+
+  &:active {
+    background-color: $primaryD2;
+    color: $white;
+  }
+
+  &:focus-visible {
+    outline: 0.1rem dashed $primaryUp;
+    outline-offset: 0.1rem;
+  }
+}
+
+.large {
+  padding: 0.75rem;
+}
+
+.disabled {
+  background-color: $disabled;
+  color: $white;
+  cursor: not-allowed;
+
+  &:focus-visible {
+    outline: 0.1rem dashed $primaryUp;
+    outline-offset: 0.1rem;
+  }
+}
