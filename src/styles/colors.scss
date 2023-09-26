@@ -1,20 +1,62 @@
 // Black & White Shades
 $black: #000000;
+$darkGrey: #343433;
 $grey: #999999;
 $liteGrey: #d6d6d6;
 $white: #ffffff;
 
+// Brand
+// https://www.rgbtohex.net/rgb/170-10-245
+$primary: #aa0af5;
+
+// Complements
+$failComplement: #f50a26;
+$successComplement: #0af54c;
+
+// Triad
+$warnTriad: #f5aa0a;
+$successTriad: #0af5aa;
+
+// Tetrad
+$failTetrad: #f5350a;
+$successTetrad: #55f50a;
+$infoTetrad: #0acaf5;
+
+// Monochromatic
+$primaryL5: #f7f1fb;
+$primaryL4: #e6b9fc;
+$primaryL3: #ce72f9;
+$primaryL2: #c14cf7;
+$primaryL1: #b62cf6;
+$primary: #aa0af5;
+$primaryD1: #8d08ca;
+$primaryD2: #6f07a0;
+$primaryD3: #520575;
+$primaryD4: #34034b;
+$primaryD5: #170120;
+
+// Analogous
+$primaryUpUp: #4c0af5;
+$primaryUp: #7b0af5;
+$primary: #aa0af5;
+$primaryDown: #d90af5;
+$primaryDownDown: #f50ae2;
+
+
+$primaryLite: #cc33f9;
+$secondary: #0af5aa;
+$secondaryLite: #33f5aa;
+$tertiary: #f5aa0a;
+$tertiaryLite: #ffd522;
 
 // States
-$success: #72c02c;
+$success: $primary;
 $info: #2284c6;
-$warning: orange;
+$warn: $tertiary;
 $fail: #ed5565;
 $disabled: $grey;
 
-
 // Text
 $liteText: $white;
-$disabledText: $disabled;
-$link: #337ab7;
+$link: $info;
 
