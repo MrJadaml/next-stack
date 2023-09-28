@@ -35,7 +35,6 @@ export const Navbar = () => {
     setExpanded(!expanded);
   }
 
-
   return (
     <nav
       className={cn(css.sidebar, {

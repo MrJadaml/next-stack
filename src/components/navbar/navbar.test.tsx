@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '../../../test/test-utils'
 import { Navbar } from '.'
 
 describe('Navbar', () => {
@@ -59,11 +59,14 @@ describe('Navbar', () => {
       expect(icon).toBeInTheDocument()
     })
 
-    it('should render logout', () => {
+    it('should render sign out', () => {
       const { getByText, getByTitle } = render(<Navbar />)
-      const logoutElement = getByText('Log Out')
+      const userName = getByText('Bob')
+
+      const logoutElement = getByText('Sign Out')
       const icon = getByTitle('logout icon')
 
+      expect(userName).toBeInTheDocument()
       expect(logoutElement).toBeInTheDocument()
       expect(icon).toBeInTheDocument()
     })
@@ -87,7 +90,7 @@ describe('Navbar', () => {
       expect(icon).toBeInTheDocument()
     })
 
-    it('should render logout', () => {
+    it('should render user name and sign out text when signed in', () => {
       const {
         getByRole,
         getByTitle,
@@ -97,10 +100,12 @@ describe('Navbar', () => {
       const toggleButton = getByRole('button', { name: 'toggle navigation' })
       fireEvent.click(toggleButton)
 
-      const text = queryByText('Log Out')
+      const userName = queryByText('Bob')
+      const signOutText = queryByText('Sign Out')
       const icon = getByTitle('logout icon')
 
-      expect(text).toBeNull()
+      expect(userName).toBeNull()
+      expect(signOutText).toBeNull()
       expect(icon).toBeInTheDocument()
     })
   })
