@@ -2,21 +2,38 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
 }
 
 generator client {
   provider = "prisma-client-js"
 }
 
-model Post {
-  id        String  @id @default(cuid())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User?   @relation(fields: [authorId], references: [id])
-  authorId  String?
+model Address {
+  id         String  @default(cuid()) @id
+  line1      String
+  line2      String?
+  city       String
+  state      String
+  postalCode String
+  country    String
+  business   Business? @relation(fields: [businessId], references: [id])
+  businessId String?
+  user       User? @relation(fields: [userId], references: [id])
+  userId     String?
+  createdAt  DateTime  @default(now()) @map(name: "created_at")
+  updatedAt  DateTime  @updatedAt @map(name: "updated_at")
+}
+
+model Business {
+  id        String  @default(cuid()) @id
+  name      String
+  owner     User?   @relation(fields: [ownerId], references: [id])
+  ownerId   String?
+  address   Address[]
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+  updatedAt DateTime  @updatedAt @map(name: "updated_at")
 }
 
 model Account {
@@ -59,8 +76,9 @@ model User {
   image         String?
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
-  posts         Post[]
   accounts      Account[]
+  addresses     Address[]
+  businesses    Business[]
   sessions      Session[]
 
   @@map(name: "users")

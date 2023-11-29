@@ -2,29 +2,19 @@ import '../styles/globals.scss'
 import styles from './page.module.css'
 import prisma from '../../lib/prisma'
 
-async function getPosts() {
-  const posts = await prisma.post.findMany({
-    where: { published: true },
-    include: {
-      author: {
-        select: { name: true },
-      },
-    },
-  })
-
-  return posts
+async function getBusinesses() {
+  return await prisma.business.findMany({})
 }
 
 export default async function Home() {
-  const posts = await getPosts()
+  const businesses = await getBusinesses()
 
   return (
     <main className={styles.main}>
       <div className={styles.description}>
-        {posts.map(post => (
-          <div key={post.id}>
-            <h3>{post.title}</h3>
-            <p>Author: {post.author?.name}</p>
+        {businesses.map(business => (
+          <div key={business.id}>
+            <h3>{business.name}</h3>
           </div>
         ))}
       </div>
