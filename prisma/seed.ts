@@ -9,6 +9,13 @@ const prisma = new PrismaClient()
 // VerificationToken
 
 async function main() {
+  // Delete all existing records
+  await prisma.verificationToken.deleteMany({});
+  await prisma.session.deleteMany({});
+  await prisma.business.deleteMany({});
+  await prisma.user.deleteMany({});
+  await prisma.address.deleteMany({});
+
   const bob = await prisma.user.upsert({
     where: { email: 'bob@mail.com' },
     update: {},
@@ -32,7 +39,7 @@ async function main() {
     where: { email: 'gill@mail.com' },
     update: {},
     create: {
-      email: 'gillbob@mail.com',
+      email: 'gill@mail.com',
       name: 'Gill',
       businesses: {
         create: [
@@ -44,7 +51,23 @@ async function main() {
     },
   })
 
-  console.log({ bob, gill })
+  const john = await prisma.user.upsert({
+    where: { email: 'john@mail.com' },
+    update: {},
+    create: {
+      email: 'john@mail.com',
+      name: 'John',
+      businesses: {
+        create: [
+          {
+            name: 'Things and Stuffs',
+          },
+        ],
+      },
+    },
+  })
+
+  console.log({ bob, gill, john })
 }
 
 main()
